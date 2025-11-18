@@ -1,257 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Biografía</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0b0b0b;
-  --muted:#9aa0a6;
-  --accent:#ffd400;
-  --white:#ffffff;
-  --gap:18px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-  background:var(--bg);
-  color:var(--white);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
-}
-header{position:fixed;left:0;right:0;top:0;z-index:60}
-header nav{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:22px;
-  padding:20px 36px;
-  background:transparent;
-  color:var(--white);
-}
-header nav a{
-  color:var(--white);
-  text-decoration:none;
-  font-weight:600;
-  opacity:.9;
-  letter-spacing:.2px;
-  transition:color .2s,opacity .2s;
-}
-header nav a:hover{color:var(--accent);opacity:1}
-.top-controls{position:fixed;right:36px;top:20px;display:flex;gap:18px;align-items:center;z-index:70}
-.search{
-  color:var(--muted);
-  font-size:14px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:rgba(255,255,255,0.02);
-  padding:8px 12px;border-radius:999px;
-  border:1px solid rgba(255,255,255,0.03);
-}
-.hamburger{
-  width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-}
-.hamburger:before{content:"≡";color:var(--white);font-weight:700;opacity:.9}
-.hero{
-  position:relative;
-  width:100%;
-  min-height:100vh;
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  align-items:center;
-  padding:110px 6vw 60px;
-  gap:30px;
-  overflow:hidden;
-}
-.grid-overlay{
-  position:absolute;inset:0;pointer-events:none;z-index:10;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: calc(100% / 12) calc(100% / 6);
-  mix-blend-mode:overlay;
-}
-.hero-left{
-  z-index:20;
-  padding-right:40px;
-  max-width:540px;
-}
-.kicker{color:var(--muted);font-size:14px;margin-bottom:18px;font-weight:600}
-.headline{
-  font-family:Montserrat, sans-serif;
-  font-weight:900;
-  font-size:clamp(64px, 9vw, 160px);
-  line-height:0.95;
-  letter-spacing:-2px;
-  margin:0;
-  color:rgba(255,255,255,0.96);
-  text-wrap:balance;
-}
-.subtext{color:var(--muted);margin-top:18px;font-size:15px;line-height:1.6}
-.hero-right{
-  position:relative;
-  z-index:15;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:60vh;
-  overflow:visible;
-}
-.hero-image{
-  width:110%;
-  max-width:1100px;
-  height:calc(60vh + 40px);
-  background-position:center;
-  background-size:cover;
-  border-radius:6px;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.7), inset 0 0 120px rgba(0,0,0,0.25);
-  transform:translateX(5%);
-}
-.index-num{
-  position:fixed;right:48px;top:50%;
-  transform:translateY(-50%) rotate(90deg);
-  color:rgba(255,255,255,0.06);
-  font-weight:900;font-size:120px;letter-spacing:12px;
-  z-index:12;
-  pointer-events:none;
-}
-.thumb{
-  position:absolute;right:10%;bottom:6%;
-  width:120px;height:140px;border-radius:6px;overflow:hidden;
-  border:4px solid rgba(0,0,0,0.5);
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-  z-index:30;
-  background:#111;
-}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.nav-arrows{position:fixed;left:36px;bottom:36px;display:flex;gap:12px;z-index:40}
-.circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.03);cursor:pointer}
-.circle.primary{background:var(--accent);color:#111;border:none}
-.circle svg{width:18px;height:18px;display:block}
-.credit{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);color:rgba(255,255,255,0.06);font-size:12px;z-index:5}
-@media (max-width:1000px){
-  .hero{grid-template-columns:1fr; padding-top:90px; padding-bottom:80px}
-  .hero-right{order:-1}
-  .index-num{display:none}
-  .thumb{right:6%}
-  header nav{padding:14px 18px}
-}
-@media (max-width:600px){
-  .kicker{font-size:13px}
-  .subtext{font-size:14px}
-  .thumb{width:88px;height:100px;bottom:8%}
-  .hero-left{padding-right:0}
-  .circle{width:48px;height:48px}
-  .circle.primary{width:48px;height:48px}
-  .headline{font-size:clamp(36px,14vw,68px)}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Biografía · Jero</title>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --muted:#9aa0a6;
+      --accent:#ffd400;
+      --white:#ffffff;
+      --gap:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    header{position:fixed;left:0;right:0;top:0;z-index:60}
+    header nav{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:22px;
+      padding:20px 36px;
+      background:transparent;
+      color:var(--white);
+    }
+    header nav a{
+      color:var(--white);
+      text-decoration:none;
+      font-weight:600;
+      opacity:.9;
+      letter-spacing:.2px;
+      transition:color .2s,opacity .2s;
+    }
+    header nav a:hover{color:var(--accent);opacity:1}
+
+    .top-controls{position:fixed;right:36px;top:20px;display:flex;gap:18px;align-items:center;z-index:70}
+    .search{
+      color:var(--muted);
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,0.02);
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hamburger{
+      width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;
+    }
+    .hamburger:before{content:"≡";color:var(--white);font-weight:700;opacity:.9}
+
+    .hero{
+      position:relative;
+      width:100%;
+      min-height:100vh;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      align-items:center;
+      padding:110px 6vw 60px;
+      gap:30px;
+      overflow:hidden;
+    }
+
+    .grid-overlay{
+      position:absolute;inset:0;pointer-events:none;z-index:10;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: calc(100% / 12) calc(100% / 6);
+      mix-blend-mode:overlay;
+    }
+
+    .hero-left{
+      z-index:20;
+      padding-right:40px;
+      max-width:540px;
+    }
+    .kicker{color:var(--muted);font-size:14px;margin-bottom:18px;font-weight:600}
+    .headline{
+      font-family:Montserrat, sans-serif;
+      font-weight:900;
+      font-size:clamp(64px, 9vw, 160px);
+      line-height:0.95;
+      letter-spacing:-2px;
+      margin:0;
+      color:rgba(255,255,255,0.96);
+      text-wrap:balance;
+    }
+    .subtext{color:var(--muted);margin-top:18px;font-size:15px;line-height:1.6}
+
+    .hero-right{
+      position:relative;
+      z-index:15;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:60vh;
+      overflow:visible;
+    }
+    .hero-image{
+      width:110%;
+      max-width:1100px;
+      height:calc(60vh + 40px);
+      background-position:center;
+      background-size:cover;
+      border-radius:6px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7), inset 0 0 120px rgba(0,0,0,0.25);
+      transform:translateX(5%);
+    }
+
+    .index-num{
+      position:fixed;right:48px;top:50%;
+      transform:translateY(-50%) rotate(90deg);
+      color:rgba(255,255,255,0.06);
+      font-weight:900;font-size:120px;letter-spacing:12px;
+      z-index:12;
+      pointer-events:none;
+    }
+
+    .thumb{
+      position:absolute;right:10%;bottom:6%;
+      width:120px;height:140px;border-radius:6px;overflow:hidden;
+      border:4px solid rgba(0,0,0,0.5);
+      box-shadow:0 20px 40px rgba(0,0,0,0.6);
+      z-index:30;
+      background:#111;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .nav-arrows{position:fixed;left:36px;bottom:36px;display:flex;gap:12px;z-index:40}
+    .circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.03);cursor:pointer}
+    .circle.primary{background:var(--accent);color:#111;border:none}
+    .circle svg{width:18px;height:18px;display:block}
+
+    .credit{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);color:rgba(255,255,255,0.06);font-size:12px;z-index:5}
+
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr; padding-top:90px; padding-bottom:80px}
+      .hero-right{order:-1}
+      .index-num{display:none}
+      .thumb{right:6%}
+      header nav{padding:14px 18px}
+    }
+    @media (max-width:600px){
+      .kicker{font-size:13px}
+      .subtext{font-size:14px}
+      .thumb{width:88px;height:100px;bottom:8%}
+      .hero-left{padding-right:0}
+      .circle{width:48px;height:48px}
+      .circle.primary{width:48px;height:48px}
+      .headline{font-size:clamp(36px,14vw,68px)}
+    }
+
+  </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="biografía.html">Biografía</a>
-    <a href="carrera.html">Carrera</a>
-    <a href="discografía.html">Discografía</a>
-    <a href="galeria.html">Galería</a>
-    <a href="datos relevantes.html">Datos relevantes</a>
-    <a href="legado.html">Legado</a>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="biografía.html">Biografía</a>
+      <a href="carrera.html">Carrera</a>
+      <a href="discografía.html">Discografía</a>
+      <a href="galeria.html">Galería</a>
+      <a href="datos relevantes.html">Datos relevantes</a>
+      <a href="legado.html">Legado</a>
+    </nav>
+  </header>
 
-<div class="top-controls" aria-hidden="true">
-  <div class="search" title="Buscar">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span style="opacity:.7">Buscar...</span>
-  </div>
-  <div class="hamburger" aria-label="menu"></div>
-</div>
-
-<section class="hero" role="region" aria-label="Hero biográfico">
-  <div class="grid-overlay" aria-hidden="true"></div>
-
-  <div class="hero-left" id="leftCol">
-    <div class="kicker" id="heroKicker">H-legends · Biografía</div>
-    <h1 class="headline" id="heroName">Jeros</h1>
-    <p class="subtext" id="heroIntro">Aquí irá la descripción completa de Jeros por etapas...</p>
+  <div class="top-controls" aria-hidden="true">
+    <div class="search" title="Buscar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="opacity:.7">Buscar...</span>
+    </div>
+    <div class="hamburger" aria-label="menu"></div>
   </div>
 
-  <div class="hero-right">
-    <div class="hero-image" id="heroImage" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU');"></div>
-    <div class="thumb" id="thumb">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU" alt="Mini retrato">
+  <section class="hero" role="region" aria-label="Hero biográfico">
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <div class="hero-left" id="leftCol">
+      <div class="kicker">H-legends · Biografía</div>
+      <h1 class="headline" id="heroName">Biografía</h1>
+
+      <p class="subtext" id="heroIntro">
+        Jero, cantante de Los Chichos, conocido por su estilo único y letras que reflejan la vida del barrio.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-image" id="heroImage" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU');"></div>
+      <div class="thumb" id="thumb">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU" alt="Mini retrato">
+      </div>
+    </div>
+
+  </section>
+
+  <div class="index-num" aria-hidden="true">003</div>
+
+  <div class="nav-arrows" aria-hidden="true">
+    <div class="circle" id="prevBtn" title="Anterior">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="circle primary" id="nextBtn" title="Siguiente">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
-</section>
 
-<div class="index-num" aria-hidden="true">001</div>
+  <div class="credit">H-legends · portfolio</div>
 
-<div class="nav-arrows" aria-hidden="true">
-  <div class="circle" id="prevBtn" title="Anterior">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="circle primary" id="nextBtn" title="Siguiente">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-</div>
+  <script>
+    (function(){
+      const pages = [
+        {url: 'biografía.html', name: 'Biografía', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU', thumb: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU', intro: 'Jero, cantante de Los Chichos, conocido por su estilo único y letras que reflejan la vida del barrio.'},
+        {url: 'carrera.html', name: 'Carrera', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop', intro: 'Jero empezó su carrera musical a finales de los 70, con un estilo flamenco-rumano muy propio.'},
+        {url: 'discografía.html', name: 'Discografía', image: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1600&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop', intro: 'Entre sus discos más famosos destacan "Ni más ni menos", "Callejero" y "Amor de madre".'},
+        {url: 'galeria.html', name: 'Galería', image: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1600&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=800&auto=format&fit=crop', intro: 'Fotos inéditas de Jero a lo largo de su vida y carrera.'},
+        {url: 'datos relevantes.html', name: 'Datos Relevantes', image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?q=80&w=1600&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?q=80&w=800&auto=format&fit=crop', intro: 'Datos curiosos y detalles sobre su vida personal y profesional.'},
+        {url: 'legado.html', name: 'Legado', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1600&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop', intro: 'El legado de Jero permanece vivo en la música española, inspirando a nuevas generaciones.'}
+      ];
 
-<div class="credit">H-legends · portfolio</div>
+      const currentUrl = window.location.pathname.split("/").pop();
+      let idx = pages.findIndex(p => p.url === currentUrl);
+      if(idx === -1) idx = 0;
 
-<script>
-(function(){
-  const etapas=[
-    {
-      title:'Biografía',
-      kicker:'Nacimiento y orígenes',
-      text:'José de Lima, conocido artísticamente como Jero, nació en 1949 en el humilde barrio madrileño de Orcasitas, donde desde niño se sintió atraído por la música flamenca y las historias de su entorno. Su infancia estuvo marcada por la pobreza y la vida en la calle, experiencias que más tarde reflejaría en sus canciones. En los años 70 se unió a Los Chichos, junto a su primo Juan y su hermano Emilio, y juntos revolucionaron la rumba flamenca, mezclando la tradición gitana con sonidos urbanos y populares. Jero destacaba por su voz profunda y emotiva, capaz de transmitir toda la pasión y la realidad de los barrios humildes. Canciones como “Ni más ni menos” o “Quiero ser libre” mostraban historias de amor, desamor, traición y lucha cotidiana. Además de su carrera con Los Chichos, también emprendió proyectos en solitario, siempre manteniendo su autenticidad y estilo único. A lo largo de su vida enfrentó problemas personales, incluidos conflictos y adicciones, pero nunca dejó de componer ni de cantar, convirtiéndose en un reflejo de su comunidad. Su música, cercana y sincera, conectó con varias generaciones de españoles y gitanos por igual. Jero falleció en 2017, dejando un legado musical profundo que todavía inspira a artistas y aficionados del flamenco y la rumba. Hoy es recordado como un icono de la música popular española, un símbolo de los barrios humildes y de la fuerza del espíritu gitano',
-      image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU',
-      thumb:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvi7VO14PIoBJj820XYScWGpqBigdvIAoGyTIU6k2Or49-c3ZpdEvrL1I8SmrMwDfiYMA&usqp=CAU',
-      audios:[]
-    },
-    // Añade más etapas aquí con tus propias imágenes y audios
-  ];
+      const heroImage = document.getElementById('heroImage');
+      const thumb = document.querySelector('.thumb img');
+      const heroName = document.getElementById('heroName');
+      const heroIntro = document.getElementById('heroIntro');
 
-  let idx=0;
-  const heroImage=document.getElementById('heroImage');
-  const thumb=document.querySelector('.thumb img');
-  const heroName=document.getElementById('heroName');
-  const heroIntro=document.getElementById('heroIntro');
-  const heroKicker=document.getElementById('heroKicker');
+      function update(i){
+        heroImage.style.backgroundImage = 'url(' + pages[i].image + ')';
+        thumb.src = pages[i].thumb;
+        heroName.textContent = pages[i].name;
+        heroIntro.textContent = pages[i].intro;
+      }
 
-  function update(i){
-    heroImage.style.backgroundImage='url('+etapas[i].image+')';
-    thumb.src=etapas[i].thumb;
-    heroName.textContent='Jeros';
-    heroKicker.textContent=etapas[i].kicker;
-    heroIntro.textContent=etapas[i].text;
-    document.querySelector('.index-num').textContent=String(i+1).padStart(3,'0');
-  }
+      document.getElementById('nextBtn').addEventListener('click', function(){
+        idx = (idx + 1) % pages.length;
+        window.location.href = pages[idx].url;
+      });
 
-  document.getElementById('nextBtn').addEventListener('click', function(){
-    idx=(idx+1)%etapas.length;
-    update(idx);
-  });
-  document.getElementById('prevBtn').addEventListener('click', function(){
-    idx=(idx-1+etapas.length)%etapas.length;
-    update(idx);
-  });
+      document.getElementById('prevBtn').addEventListener('click', function(){
+        idx = (idx - 1 + pages.length) % pages.length;
+        window.location.href = pages[idx].url;
+      });
 
-  document.getElementById('thumb').addEventListener('click', function(){ idx=(idx+1)%etapas.length; update(idx) });
+      document.getElementById('thumb').addEventListener('click', function(){
+        idx = (idx + 1) % pages.length;
+        window.location.href = pages[idx].url;
+      });
 
-  update(0);
-})();
-</script>
+      update(idx);
+    })();
+  </script>
 
 </body>
 </html>
-
 
