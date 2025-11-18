@@ -1,302 +1,361 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Biografía</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biografía</title>
 
-  <!-- Fuentes -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#0b0b0b;
-      --muted:#9aa0a6;
-      --accent:#ffd400;
-      --white:#ffffff;
-      --gap:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background:var(--bg);
-      color:var(--white);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
-    }
+<style>
+:root{
+  --bg:#0b0b0b;
+  --muted:#9aa0a6;
+  --accent:#ffd400;
+  --white:#ffffff;
+  --gap:18px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background:var(--bg);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
 
-    /* Header (user requested header structure) */
-    header{position:fixed;left:0;right:0;top:0;z-index:60}
-    header nav{
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      gap:22px;
-      padding:20px 36px;
-      background:transparent;
-      color:var(--white);
-    }
-    header nav a{
-      color:var(--white);
-      text-decoration:none;
-      font-weight:600;
-      opacity:.9;
-      letter-spacing:.2px;
-      transition:color .2s,opacity .2s;
-    }
-    header nav a:hover{color:var(--accent);opacity:1}
+header{position:fixed;left:0;right:0;top:0;z-index:60}
+header nav{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:22px;
+  padding:20px 36px;
+  background:transparent;
+  color:var(--white);
+}
+header nav a{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:600;
+  opacity:.9;
+  letter-spacing:.2px;
+  transition:color .2s,opacity .2s;
+}
+header nav a:hover{color:var(--accent);opacity:1}
 
-    /* Top right controls */
-    .top-controls{position:fixed;right:36px;top:20px;display:flex;gap:18px;align-items:center;z-index:70}
-    .search{
-      color:var(--muted);
-      font-size:14px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:rgba(255,255,255,0.02);
-      padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .hamburger{
-      width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);
-      display:flex;align-items:center;justify-content:center;cursor:pointer;
-    }
-    .hamburger:before{content:"≡";color:var(--white);font-weight:700;opacity:.9}
+.top-controls{position:fixed;right:36px;top:20px;display:flex;gap:18px;align-items:center;z-index:70}
+.search{
+  color:var(--muted);
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,0.02);
+  padding:8px 12px;border-radius:999px;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.hamburger{
+  width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.hamburger:before{content:"≡";color:var(--white);font-weight:700;opacity:.9}
 
-    /* Hero container */
-    .hero{
-      position:relative;
-      width:100%;
-      min-height:100vh;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      align-items:center;
-      padding:110px 6vw 60px;
-      gap:30px;
-      overflow:hidden;
-    }
+.hero{
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:110px 6vw 60px;
+  gap:30px;
+  overflow:hidden;
+}
 
-    /* Grid overlay (thin lines) */
-    .grid-overlay{
-      position:absolute;inset:0;pointer-events:none;z-index:10;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: calc(100% / 12) calc(100% / 6);
-      mix-blend-mode:overlay;
-    }
+.grid-overlay{
+  position:absolute;inset:0;pointer-events:none;z-index:10;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: calc(100% / 12) calc(100% / 6);
+  mix-blend-mode:overlay;
+}
 
-    /* Left column text */
-    .hero-left{
-      z-index:20;
-      padding-right:40px;
-      max-width:540px;
-    }
-    .kicker{color:var(--muted);font-size:14px;margin-bottom:18px;font-weight:600}
-    .headline{
-      font-family:Montserrat, sans-serif;
-      font-weight:900;
-      font-size:clamp(64px, 9vw, 160px);
-      line-height:0.95;
-      letter-spacing:-2px;
-      margin:0;
-      color:rgba(255,255,255,0.96);
-      text-wrap:balance;
-    }
-    .subtext{color:var(--muted);margin-top:18px;font-size:15px;line-height:1.6}
+.hero-left{
+  z-index:20;
+  padding-right:40px;
+  max-width:540px;
+}
+.kicker{color:var(--muted);font-size:14px;margin-bottom:18px;font-weight:600}
+.headline{
+  font-family:Montserrat, sans-serif;
+  font-weight:900;
+  font-size:clamp(64px, 9vw, 160px);
+  line-height:0.95;
+  letter-spacing:-2px;
+  margin:0;
+  color:rgba(255,255,255,0.96);
+  text-wrap:balance;
+  transition:opacity .5s;
+}
+.subtext{
+  color:var(--muted);
+  margin-top:18px;
+  font-size:15px;
+  line-height:1.6;
+  transition:opacity .5s;
+}
 
-    /* Right column: hero image */
-    .hero-right{
-      position:relative;
-      z-index:15;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:60vh;
-      overflow:visible;
-    }
-    .hero-image{
-      width:110%;
-      max-width:1100px;
-      height:calc(60vh + 40px);
-      background-position:center;
-      background-size:cover;
-      border-radius:6px;
-      box-shadow: 0 40px 120px rgba(0,0,0,0.7), inset 0 0 120px rgba(0,0,0,0.25);
-      transform:translateX(5%);
-    }
+.hero-right{
+  position:relative;
+  z-index:15;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:60vh;
+  overflow:visible;
+  transition:opacity .5s;
+}
+.hero-image{
+  width:110%;
+  max-width:1100px;
+  height:calc(60vh + 40px);
+  background-position:center;
+  background-size:cover;
+  border-radius:6px;
+  box-shadow:0 40px 120px rgba(0,0,0,0.7), inset 0 0 120px rgba(0,0,0,0.25);
+  transform:translateX(5%);
+  transition:background-image .5s;
+}
 
-    /* vertical number at right */
-    .index-num{
-      position:fixed;right:48px;top:50%;
-      transform:translateY(-50%) rotate(90deg);
-      color:rgba(255,255,255,0.06);
-      font-weight:900;font-size:120px;letter-spacing:12px;
-      z-index:12;
-      pointer-events:none;
-    }
+.thumb{
+  position:absolute;right:10%;bottom:6%;
+  width:120px;height:140px;border-radius:6px;overflow:hidden;
+  border:4px solid rgba(0,0,0,0.5);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+  z-index:30;
+  background:#111;
+  cursor:pointer;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
 
-    /* small thumbnail overlay */
-    .thumb{
-      position:absolute;right:10%;bottom:6%;
-      width:120px;height:140px;border-radius:6px;overflow:hidden;
-      border:4px solid rgba(0,0,0,0.5);
-      box-shadow:0 20px 40px rgba(0,0,0,0.6);
-      z-index:30;
-      background:#111;
-    }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.nav-arrows{position:fixed;left:36px;bottom:36px;display:flex;gap:12px;z-index:40}
+.circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.03);cursor:pointer;transition:transform .2s}
+.circle:hover{transform:scale(1.1)}
+.circle.primary{background:var(--accent);color:#111;border:none}
+.circle svg{width:18px;height:18px;display:block}
 
-    /* circular nav arrows bottom-left */
-    .nav-arrows{position:fixed;left:36px;bottom:36px;display:flex;gap:12px;z-index:40}
-    .circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.03);cursor:pointer}
-    .circle.primary{background:var(--accent);color:#111;border:none}
-    .circle svg{width:18px;height:18px;display:block}
+.credit{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);color:rgba(255,255,255,0.06);font-size:12px;z-index:5}
 
-    /* footer area small credit */
-    .credit{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);color:rgba(255,255,255,0.06);font-size:12px;z-index:5}
+.timeline{
+  position:fixed;
+  left:50%;
+  bottom:120px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:12px;
+  z-index:30;
+}
+.timeline-dot{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  cursor:pointer;
+  border:2px solid rgba(255,255,255,0.03);
+  transition:all .3s;
+}
+.timeline-dot.active{
+  background:var(--accent);
+  transform:scale(1.3);
+  border:none;
+}
 
-    /* responsive adjustments */
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr; padding-top:90px; padding-bottom:80px}
-      .hero-right{order:-1}
-      .index-num{display:none}
-      .thumb{right:6%}
-      header nav{padding:14px 18px}
-    }
-    @media (max-width:600px){
-      .kicker{font-size:13px}
-      .subtext{font-size:14px}
-      .thumb{width:88px;height:100px;bottom:8%}
-      .hero-left{padding-right:0}
-      .circle{width:48px;height:48px}
-      .circle.primary{width:48px;height:48px}
-      .headline{font-size:clamp(36px,14vw,68px)}
-    }
+.audio-list{margin-top:20px;}
+.audio-item{margin-bottom:10px;}
+.audio-item audio{width:100%;outline:none}
 
-  </style>
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr; padding-top:90px; padding-bottom:80px}
+  .hero-right{order:-1}
+  .index-num{display:none}
+  .thumb{right:6%}
+  header nav{padding:14px 18px}
+}
+@media(max-width:600px){
+  .kicker{font-size:13px}
+  .subtext{font-size:14px}
+  .thumb{width:88px;height:100px;bottom:8%}
+  .hero-left{padding-right:0}
+  .circle{width:48px;height:48px}
+  .circle.primary{width:48px;height:48px}
+  .headline{font-size:clamp(36px,14vw,68px)}
+}
+</style>
 </head>
 <body>
 
-  <!-- Header (user's requested content/structure) -->
-  <header>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="biografía.html">Biografía</a>
-      <a href="carrera.html">Carrera</a>
-      <a href="discografía.html">Discografía</a>
-      <a href="galeria.html">Galería</a>
-      <a href="datos relevantes.html">Datos relevantes</a>
-      <a href="legado.html">Legado</a>
-    </nav>
-  </header>
+<header>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Biografía</a>
+    <a href="#">Carrera</a>
+    <a href="#">Discografía</a>
+    <a href="#">Galería</a>
+    <a href="#">Legado</a>
+  </nav>
+</header>
 
-  <!-- Top-right small controls -->
-  <div class="top-controls" aria-hidden="true">
-    <div class="search" title="Buscar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="opacity:.7">Buscar...</span>
-    </div>
-    <div class="hamburger" aria-label="menu"></div>
+<div class="top-controls" aria-hidden="true">
+  <div class="search" title="Buscar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span style="opacity:.7">Buscar...</span>
+  </div>
+  <div class="hamburger" aria-label="menu"></div>
+</div>
+
+<section class="hero" role="region" aria-label="Hero biográfico">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="hero-left" id="leftCol">
+    <div class="kicker" id="kicker">Jeros · Etapa</div>
+    <h1 class="headline" id="heroName">Biografía</h1>
+    <p class="subtext" id="heroIntro">
+      Texto inicial de la biografía de Jeros.
+    </p>
+    <div class="audio-list" id="audioList"></div>
   </div>
 
-  <!-- hero -->
-  <section class="hero" role="region" aria-label="Hero biográfico">
-    <div class="grid-overlay" aria-hidden="true"></div>
-
-    <div class="hero-left" id="leftCol">
-      <div class="kicker">H-legends · Biografía</div>
-      <h1 class="headline" id="heroName">Robert De Niro</h1>
-
-      <p class="subtext" id="heroIntro">
-        Actor emblemático de Estados Unidos, ganador de múltiples premios y conocido por su intensidad interpretativa.
-        Su carrera, que abarca más de cinco décadas, ha marcado la historia del cine con papeles inolvidables.
-      </p>
+  <div class="hero-right">
+    <div class="hero-image" id="heroImage"
+         style="background-image:url('https://forojerista.es/wp-content/uploads/2019/10/biografia-de-Jeros.jpg');">
     </div>
-
-    <div class="hero-right">
-      <!-- Replace the URL below with your high-res portrait -->
-      <div class="hero-image" id="heroImage" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');"></div>
-
-      <!-- small thumbnail overlay — replace URL -->
-      <div class="thumb" id="thumb">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Mini retrato">
-      </div>
-    </div>
-
-  </section>
-
-  <!-- vertical big number -->
-  <div class="index-num" aria-hidden="true">003</div>
-
-  <!-- nav arrows -->
-  <div class="nav-arrows" aria-hidden="true">
-    <div class="circle" id="prevBtn" title="Anterior">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="circle primary" id="nextBtn" title="Siguiente">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="thumb" id="thumb">
+      <img src="https://forojerista.es/wp-content/uploads/2019/10/biografia-de-Jeros.jpg" alt="Retrato Jeros">
     </div>
   </div>
+</section>
 
-  <div class="credit">H-legends · portfolio</div>
+<div class="index-num" aria-hidden="true" id="indexNum">01</div>
 
-  <script>
-    // Simple JS to change hero image / thumb when pressing arrows (demo)
-    (function(){
-      // Demo images array — replace with your own list
-      const images = [
-        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1600&auto=format&fit=crop'
-      ];
-      const names = ['Robert De Niro','Legend Name Two','Legend Name Three'];
-      const intros = [
-        'Actor emblemático de Estados Unidos, ganador de múltiples premios y conocido por su intensidad interpretativa.',
-        'Segunda biografía de ejemplo con descripción más breve pero igualmente potente.',
-        'Tercer ejemplo de ficha con estilo similar y narrativa compacta.'
-      ];
+<div class="nav-arrows" aria-hidden="true">
+  <div class="circle" id="prevBtn" title="Anterior">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="circle primary" id="nextBtn" title="Siguiente">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
 
-      let idx = 0;
-      const heroImage = document.getElementById('heroImage');
-      const thumb = document.querySelector('.thumb img');
-      const heroName = document.getElementById('heroName');
-      const heroIntro = document.getElementById('heroIntro');
+<div class="timeline" id="timeline"></div>
+<div class="credit">H‑Legends · Jeros</div>
 
-      function update(i){
-        heroImage.style.backgroundImage = 'url('+images[i]+')';
-        thumb.src = images[i];
-        heroName.textContent = names[i];
-        heroIntro.textContent = intros[i];
-      }
+<script>
+(function(){
+  const etapas=[
+    {
+      title:'Biografía',
+      kicker:'Nacimiento y origen',
+      text:`Juan Antonio Jiménez Muñoz, conocido como Jeros, nació el 29 de marzo de 1951 en Valladolid. Desde joven destacó en la música y formó parte de Los Chichos.`,
+      image:'https://forojerista.es/wp-content/uploads/2019/10/biografia-de-Jeros.jpg',
+      thumb:'https://forojerista.es/wp-content/uploads/2019/10/biografia-de-Jeros.jpg',
+      audios:[]
+    },
+    {
+      title:'Carrera con Los Chichos',
+      kicker:'Éxito en la rumba gitana',
+      text:`Entre 1973 y 1989, Jeros marcó la historia de la rumba gitana con éxitos como Ni más, ni menos, Son ilusiones y Amor de compra y venta.`,
+      image:'https://forojerista.es/wp-content/uploads/2020/01/los-chichos-jeros.jpg',
+      thumb:'https://forojerista.es/wp-content/uploads/2020/01/los-chichos-jeros.jpg',
+      audios:[
+        {title:'Ni más, ni menos','src':'https://www.example.com/audio1.mp3'},
+        {title:'Son ilusiones','src':'https://www.example.com/audio2.mp3'}
+      ]
+    },
+    {
+      title:'Discografía',
+      kicker:'Álbumes clave',
+      text:`Con Los Chichos y en solitario, Jeros dejó discos como Tembló pero no calló y Agua & Veneno.`,
+      image:'https://forojerista.es/wp-content/uploads/2022/05/discografia-jeros.jpg',
+      thumb:'https://forojerista.es/wp-content/uploads/2022/05/discografia-jeros-thumb.jpg',
+      audios:[]
+    },
+    {
+      title:'Vida personal y lucha',
+      kicker:'Altibajos y desafíos',
+      text:`Jeros sufrió problemas personales y falleció trágicamente en 1995. Su historia inspira a la comunidad gitana y a músicos en España.`,
+      image:'https://forojerista.es/wp-content/uploads/2019/10/Jeros-homenaje.jpg',
+      thumb:'https://forojerista.es/wp-content/uploads/2019/10/Jeros-homenaje.jpg',
+      audios:[]
+    },
+    {
+      title:'Legado y homenaje',
+      kicker:'Influencia y reconocimiento',
+      text:`El legado de Jeros sigue vivo. Su hijo Chaboli produjo el álbum Homenaje a Jeros, y sus canciones continúan inspirando generaciones.`,
+      image:'https://forojerista.es/wp-content/uploads/2020/01/Homenaje-a-Jeros.jpg',
+      thumb:'https://forojerista.es/wp-content/uploads/2020/01/Homenaje-a-Jeros-thumb.jpg',
+      audios:[]
+    }
+  ];
 
-      document.getElementById('nextBtn').addEventListener('click', function(){
-        idx = (idx + 1) % images.length;
-        update(idx);
-      });
-      document.getElementById('prevBtn').addEventListener('click', function(){
-        idx = (idx - 1 + images.length) % images.length;
-        update(idx);
-      });
+  let idx=0;
+  const heroImage=document.getElementById('heroImage');
+  const thumbImg=document.querySelector('.thumb img');
+  const heroName=document.getElementById('heroName');
+  const kicker=document.getElementById('kicker');
+  const heroIntro=document.getElementById('heroIntro');
+  const indexNum=document.getElementById('indexNum');
+  const audioList=document.getElementById('audioList');
+  const timeline=document.getElementById('timeline');
 
-      // optional: click thumbnail to cycle
-      document.getElementById('thumb').addEventListener('click', function(){ idx=(idx+1)%images.length; update(idx) });
+  function update(i){
+    const etapa=etapas[i];
+    heroName.textContent=etapa.title;
+    kicker.textContent=etapa.kicker;
+    heroIntro.textContent=etapa.text;
+    heroImage.style.backgroundImage=`url('${etapa.image}')`;
+    thumbImg.src=etapa.thumb;
+    indexNum.textContent=String(i+1).padStart(2,'0');
 
-      // initial
-      update(0);
+    // Audios
+    audioList.innerHTML='';
+    etapa.audios.forEach(a=>{
+      const div=document.createElement('div');
+      div.className='audio-item';
+      div.innerHTML=`<div>${a.title}</div><audio controls src="${a.src}"></audio>`;
+      audioList.appendChild(div);
+    });
 
-      // simple keyboard support
-      window.addEventListener('keydown', function(e){
-        if(e.key === 'ArrowRight') { idx = (idx+1) % images.length; update(idx) }
-        if(e.key === 'ArrowLeft') { idx = (idx-1+images.length) % images.length; update(idx) }
-      });
-    })();
-  </script>
+    // Timeline
+    Array.from(timeline.children).forEach((dot,j)=>{
+      dot.classList.toggle('active',j===i);
+    });
+  }
+
+  // Crear timeline
+  etapas.forEach((_,i)=>{
+    const dot=document.createElement('div');
+    dot.className='timeline-dot';
+    dot.addEventListener('click',()=>{idx=i;update(idx)});
+    timeline.appendChild(dot);
+  });
+
+  document.getElementById('nextBtn').addEventListener('click',()=>{idx=(idx+1)%etapas.length;update(idx)});
+  document.getElementById('prevBtn').addEventListener('click',()=>{idx=(idx-1+etapas.length)%etapas.length;update(idx)});
+  document.getElementById('thumb').addEventListener('click',()=>{idx=(idx+1)%etapas.length;update(idx)});
+  window.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){idx=(idx+1)%etapas.length;update(idx)};if(e.key==='ArrowLeft'){idx=(idx-1+etapas.length)%etapas.length;update(idx)}});
+
+  update(0);
+})();
+</script>
 
 </body>
+</html>
+
 </html>
 
