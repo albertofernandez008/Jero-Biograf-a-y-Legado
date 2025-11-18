@@ -1,157 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio - Jero</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f8f8f8;
-      color: #333;
-    }
-
-    header {
-      background-color: #222;
-      padding: 15px 0;
-    }
-    header nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    header nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 5px 10px;
-      transition: background 0.3s;
-    }
-    header nav a:hover {
-      background: #444;
-      border-radius: 4px;
-    }
-
-    section {
-      padding: 50px 10%;
-      background: #fff;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 20px;
-      color: #222;
-    }
-
-    .columns {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .column {
-      flex: 1 1 300px;
-    }
-
-    .images-grid {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-    img:hover {
-      transform: scale(1.05);
-    }
-
-    .button {
-      display: inline-block;
-      padding: 10px 25px;
-      margin-top: 15px;
-      background: #222;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
-    .button:hover {
-      background: #444;
-    }
-
-    @media (max-width: 768px) {
-      section { padding: 30px 5%; }
-      .columns { gap: 15px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jero – Inicio</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <nav>
     <a href="index.html">Inicio</a>
-    <a href="biografía.html">Biografía</a>
+    <a href="biografia.html">Biografía</a>
     <a href="carrera.html">Carrera</a>
-    <a href="discografía.html">Discografía</a>
+    <a href="discografia.html">Discografía</a>
     <a href="galeria.html">Galería</a>
-    <a href="datos relevantes.html">Datos relevantes</a>
+    <a href="datos-relevantes.html">Datos relevantes</a>
     <a href="legado.html">Legado</a>
   </nav>
 </header>
 
-<!-- About Section -->
-<section id="about-section">
+<section class="section">
+  <h1>Jero — La Voz Inmortal de Los Chichos</h1>
+  <p>Una figura legendaria en la rumba española, cuyo talento y sensibilidad marcaron generaciones.</p>
+
   <div class="columns">
-    <div class="column" style="flex: 2;">
-      <h2>La historia de Jero: leyenda de la música española</h2>
-      <p>Jero, nacido en Andalucía, se convirtió en uno de los artistas más influyentes del género flamenco y rumba. Su talento y carisma lo llevaron a la fama durante las décadas de los 70 y 80, destacándose como cantante y compositor de Los Chichos, banda emblemática que marcó un antes y un después en la música popular española.</p>
-    </div>
     <div class="column">
-      <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-8.jpeg" alt="">
+      <img src="https://i.imgur.com/3t8XnqI.jpeg" alt="Jero retrato profesional">
+    </div>
+
+    <div class="column">
+      <p>
+        Jero fue una de las voces más influyentes de la música española. Con estilo único, sensibilidad poética
+        y un carisma inconfundible, dejó un legado imborrable dentro de Los Chichos.
+      </p>
+
+      <p>
+        Descubre su vida, carrera, discos, momentos icónicos y su impacto en la cultura musical.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- Gallery Section -->
-<section id="gallery-section">
-  <h2>Galería de imágenes de Jero</h2>
-  <div class="images-grid">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-9.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-7.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-12.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-6.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-11.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-14.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-13.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-10.jpeg" alt="">
-    <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-15.jpeg" alt="">
-  </div>
-</section>
-
-<!-- Legacy Section -->
-<section id="legacy-section">
-  <div class="columns">
-    <div class="column">
-      <h2>Legado y reconocimiento de Jero</h2>
-      <p>Jero, nacido en Andalucía, es uno de los artistas más influyentes del género flamenco y rumba. Su carrera emblemática como componente de Los Chichos le ha otorgado un lugar destacado en la historia musical española, dejando un legado que trasciende generaciones.</p>
-      <a href="#" class="button">Conoce más</a>
-    </div>
-    <div class="column">
-      <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-14.jpeg" alt="">
-    </div>
-  </div>
-</section>
+<footer>
+  <p>© 2025 — Proyecto Jero</p>
+</footer>
 
 </body>
 </html>
