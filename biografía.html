@@ -3,19 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biografía</title>
+<title>Biografía de Jero</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-  header, nav { background: #333; color: #fff; padding: 10px; text-align: center; }
-  nav a { color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold; }
-  nav a:hover { text-decoration: underline; }
-  .section { padding: 50px 20px; text-align: center; }
-  .columns { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  /* Reset y tipografía */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; color: #333; line-height: 1.6; background: #f9f9f9; }
+
+  /* Header y navegación */
+  header { background: #111; color: #fff; }
+  nav { display: flex; justify-content: center; flex-wrap: wrap; padding: 15px; }
+  nav a { color: #fff; margin: 5px 15px; text-decoration: none; font-weight: 700; transition: color 0.3s; }
+  nav a:hover { color: #ffcd00; }
+
+  /* Secciones */
+  section { padding: 60px 20px; max-width: 1200px; margin: auto; }
+  h2 { font-size: 2em; margin-bottom: 20px; color: #111; }
+  p { font-size: 1.05em; margin-bottom: 20px; }
+
+  /* Columnas flexibles */
+  .columns { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
   .column { flex: 1; min-width: 250px; max-width: 460px; }
-  img { width: 100%; height: auto; object-fit: cover; }
-  h2 { font-size: 1.8em; margin-bottom: 20px; }
-  p { font-size: 1em; line-height: 1.5em; margin-bottom: 20px; text-align: left; }
-  .button a { display: inline-block; padding: 10px 20px; background: #333; color: #fff; text-decoration: none; font-weight: bold; border-radius: 5px; }
+
+  /* Imágenes */
+  img { width: 100%; height: auto; object-fit: cover; border-radius: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+
+  /* Botones estilo WordPress premium */
+  .button a {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  .button a:hover { background: #ffcd00; color: #111; }
+
+  /* Galería estilo grid */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+  
+  /* Responsive */
+  @media(max-width: 768px){
+    h2 { font-size: 1.7em; }
+    p { font-size: 1em; }
+    .columns { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
@@ -32,32 +66,7 @@
   </nav>
 </header>
 
-
-<section class="section">
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jero - Biografía</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-  header, nav { background: #333; color: #fff; padding: 10px; text-align: center; }
-  nav a { color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold; }
-  .section { padding: 50px 20px; text-align: center; }
-  .columns { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
-  .column { flex: 1; min-width: 250px; max-width: 400px; }
-  img { width: 100%; height: auto; object-fit: cover; }
-  h2 { font-size: 1.8em; margin-bottom: 20px; }
-  p { font-size: 1em; line-height: 1.5em; margin-bottom: 20px; text-align: left; }
-  .button a { display: inline-block; padding: 10px 20px; background: #333; color: #fff; text-decoration: none; font-weight: bold; border-radius: 5px; }
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .gallery img { width: 100%; height: auto; }
-</style>
-</head>
-<body>
-  
-<section class="section" id="about-section">
+<section id="about-section">
   <div class="columns">
     <div class="column" style="flex-basis:66%;">
       <h2>La historia de Jero: leyenda de la música española</h2>
@@ -71,7 +80,7 @@
   </div>
 </section>
 
-<section class="section" id="general-section">
+<section id="career-section">
   <div class="columns">
     <div class="column" style="flex-basis:66%;">
       <h2>La trayectoria inolvidable de Jero, un icono de Los Chichos</h2>
@@ -85,7 +94,7 @@
   </div>
 </section>
 
-<section class="section" id="gallery-section">
+<section id="gallery-section">
   <h2>Galería de imágenes</h2>
   <div class="gallery">
     <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/biografia-de-jero-12.jpeg" alt="Disco de oro">
@@ -94,7 +103,7 @@
   </div>
 </section>
 
-<section class="section" id="legacy-section">
+<section id="legacy-section">
   <h2>Legado y reconocimiento de Jero</h2>
   <p>Jero, nacido en Andalucía, es uno de los artistas más influyentes del género flamenco y rumba. Su carrera emblemática como componente de Los Chichos le ha otorgado un lugar destacado en la historia musical española, dejando un legado que trasciende generaciones.</p>
   <div class="button">
@@ -105,7 +114,3 @@
 </body>
 </html>
 
-</section>
-
-</body>
-</html>
