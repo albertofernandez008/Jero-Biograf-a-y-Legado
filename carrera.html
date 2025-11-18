@@ -1,12 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrera</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Carrera · Jeros</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+<style>
+ :root{
+  --bg:#0b0b0b;
+  --muted:#9aa0a6;
+  --accent:#ffd400;
+  --white:#ffffff;
+  --gap:18px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background:var(--bg);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
 
+/* Header (user requested header structure) */
+header{position:fixed;left:0;right:0;top:0;z-index:60}
+header nav{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:22px;
+  padding:20px 36px;
+  background:transparent;
+  color:var(--white);
+}
+header nav a{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:600;
+  opacity:.9;
+  letter-spacing:.2px;
+  transition:color .2s,opacity .2s;
+}
+header nav a:hover{color:var(--accent);opacity:1}
+
+/* Top right controls */
+.top-controls{position:fixed;right:36px;top:20px;display:flex;gap:18px;align-items:center;z-index:70}
+.search{
+  color:var(--muted);
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,0.02);
+  padding:8px 12px;border-radius:999px;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.hamburger{
+  width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.hamburger:before{content:"≡";color:var(--white);font-weight:700;opacity:.9}
+
+/* Hero container */
+.hero{
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  align-items:center;
+  padding:110px 6vw 60px;
+  gap:30px;
+  overflow:hidden;
+}
+
+/* Grid overlay (thin lines) */
+.grid-overlay{
+  position:absolute;inset:0;pointer-events:none;z-index:10;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: calc(100% / 12) calc(100% / 6);
+  mix-blend-mode:overlay;
+}
+
+/* Left column text */
+.hero-left{
+  z-index:20;
+  padding-right:40px;
+  max-width:540px;
+}
+.kicker{color:var(--muted);font-size:14px;margin-bottom:18px;font-weight:600}
+.headline{
+  font-family:Montserrat, sans-serif;
+  font-weight:900;
+  font-size:clamp(64px, 9vw, 160px);
+  line-height:0.95;
+  letter-spacing:-2px;
+  margin:0;
+  color:rgba(255,255,255,0.96);
+  text-wrap:balance;
+}
+.subtext{color:var(--muted);margin-top:18px;font-size:15px;line-height:1.6}
+
+/* Right column: hero image */
+.hero-right{
+  position:relative;
+  z-index:15;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:60vh;
+  overflow:visible;
+}
+.hero-image{
+  width:110%;
+  max-width:1100px;
+  height:calc(60vh + 40px);
+  background-position:center;
+  background-size:cover;
+  border-radius:6px;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.7), inset 0 0 120px rgba(0,0,0,0.25);
+  transform:translateX(5%);
+}
+
+/* vertical number at right */
+.index-num{
+  position:fixed;right:48px;top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  color:rgba(255,255,255,0.06);
+  font-weight:900;font-size:120px;letter-spacing:12px;
+  z-index:12;
+  pointer-events:none;
+}
+
+/* small thumbnail overlay */
+.thumb{
+  position:absolute;right:10%;bottom:6%;
+  width:120px;height:140px;border-radius:6px;overflow:hidden;
+  border:4px solid rgba(0,0,0,0.5);
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+  z-index:30;
+  background:#111;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* circular nav arrows bottom-left */
+.nav-arrows{position:fixed;left:36px;bottom:36px;display:flex;gap:12px;z-index:40}
+.circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.03);cursor:pointer}
+.circle.primary{background:var(--accent);color:#111;border:none}
+.circle svg{width:18px;height:18px;display:block}
+
+/* footer area small credit */
+.credit{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);color:rgba(255,255,255,0.06);font-size:12px;z-index:5}
+
+/* responsive adjustments */
+@media (max-width:1000px){
+  .hero{grid-template-columns:1fr; padding-top:90px; padding-bottom:80px}
+  .hero-right{order:-1}
+  .index-num{display:none}
+  .thumb{right:6%}
+  header nav{padding:14px 18px}
+}
+@media (max-width:600px){
+  .kicker{font-size:13px}
+  .subtext{font-size:14px}
+  .thumb{width:88px;height:100px;bottom:8%}
+  .hero-left{padding-right:0}
+  .circle{width:48px;height:48px}
+  .circle.primary{width:48px;height:48px}
+  .headline{font-size:clamp(36px,14vw,68px)}
+}
+
+</style>
+</head>
 <body>
 
 <header>
@@ -16,59 +186,44 @@
     <a href="carrera.html">Carrera</a>
     <a href="discografía.html">Discografía</a>
     <a href="galeria.html">Galería</a>
-    <a href="datos relevantes.html">Datos relevantes</a>
+    <a href="datos_relevantes.html">Datos relevantes</a>
     <a href="legado.html">Legado</a>
   </nav>
 </header>
 
-<section class="page-header">
-  <h1>La Carrera de Jero</h1>
-  <p>El pilar musical y emocional de Los Chichos.</p>
-</section>
-
-<section class="content-section">
-  <div class="text-image-block">
-    <div class="text">
-      <h2>Los comienzos de un icono</h2>
-      <p>
-        Jero inició su camino musical en la década de 1970, influenciado por la rumba, el flamenco
-        y la música callejera que marcaba a la juventud gitana de aquellos años. Su talento natural
-        para la composición y su voz característica lo llevaron a unirse a Los Chichos, donde
-        rápidamente se convirtió en una de las piezas clave del grupo.
-      </p>
-      <p>
-        Su estilo, profundamente emocional y narrativo, conectó con una generación que veía reflejadas
-        sus realidades en sus letras.
-      </p>
-    </div>
-
-    <div class="image">
-      <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/carrera-jero-1.jpeg" alt="Jero cantando en sus inicios">
-    </div>
+<section class="hero" role="region" aria-label="Hero Carrera">
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="hero-left">
+    <div class="kicker">H-legends · Carrera</div>
+    <h1 class="headline">Trayectoria Musical</h1>
+    <p class="subtext">
+      Jeros inició su carrera cantando en locales pequeños y rápidamente ganó fama gracias a su voz única. 
+      Durante los años 2000 lanzó álbumes que se convirtieron en clásicos del flamenco urbano.
+    </p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image" style="background-image:url('assets/images/carrera1.jpg');"></div>
+    <div class="thumb"><img src="assets/images/carrera1.jpg" alt="Mini retrato"></div>
   </div>
 </section>
 
-<section class="content-section">
-  <div class="text-image-block reverse">
-    <div class="text">
-      <h2>Años de consagración</h2>
-      <p>
-        Durante los 70 y 80, Jero compuso algunos de los mayores éxitos del grupo, colaboró en la
-        producción de discos y aportó una enorme carga emocional a cada tema. Su firma musical
-        definió la identidad de Los Chichos.
-      </p>
-      <p>
-        Con el paso de los años, Jero consolidó su lugar como uno de los artistas más influyentes de
-        la rumba española.
-      </p>
-    </div>
+<div class="index-num">002</div>
 
-    <div class="image">
-      <img src="https://albertofernandezmoya2-duriq.wordpress.com/wp-content/uploads/2025/11/carrera-jero-2.jpeg" alt="Jero en plena etapa de éxito">
-    </div>
-  </div>
-</section>
+<div class="nav-arrows" aria-hidden="true">
+  <div class="circle" id="prevBtn" title="Anterior"></div>
+  <div class="circle primary" id="nextBtn" title="Siguiente"></div>
+</div>
+
+<div class="credit">H-legends · portfolio</div>
+
+<script>
+document.getElementById('nextBtn').addEventListener('click', function(){
+    window.location.href = 'discografía.html';
+});
+document.getElementById('prevBtn').addEventListener('click', function(){
+    window.location.href = 'biografía.html';
+});
+</script>
 
 </body>
 </html>
-
