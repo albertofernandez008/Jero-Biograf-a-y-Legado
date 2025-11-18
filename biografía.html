@@ -1,60 +1,302 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biografía</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Biografía · Hero</title>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --muted:#9aa0a6;
+      --accent:#ffd400;
+      --white:#ffffff;
+      --gap:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* Header (user requested header structure) */
+    header{position:fixed;left:0;right:0;top:0;z-index:60}
+    header nav{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:22px;
+      padding:20px 36px;
+      background:transparent;
+      color:var(--white);
+    }
+    header nav a{
+      color:var(--white);
+      text-decoration:none;
+      font-weight:600;
+      opacity:.9;
+      letter-spacing:.2px;
+      transition:color .2s,opacity .2s;
+    }
+    header nav a:hover{color:var(--accent);opacity:1}
+
+    /* Top right controls */
+    .top-controls{position:fixed;right:36px;top:20px;display:flex;gap:18px;align-items:center;z-index:70}
+    .search{
+      color:var(--muted);
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,0.02);
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hamburger{
+      width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);
+      display:flex;align-items:center;justify-content:center;cursor:pointer;
+    }
+    .hamburger:before{content:"≡";color:var(--white);font-weight:700;opacity:.9}
+
+    /* Hero container */
+    .hero{
+      position:relative;
+      width:100%;
+      min-height:100vh;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      align-items:center;
+      padding:110px 6vw 60px;
+      gap:30px;
+      overflow:hidden;
+    }
+
+    /* Grid overlay (thin lines) */
+    .grid-overlay{
+      position:absolute;inset:0;pointer-events:none;z-index:10;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: calc(100% / 12) calc(100% / 6);
+      mix-blend-mode:overlay;
+    }
+
+    /* Left column text */
+    .hero-left{
+      z-index:20;
+      padding-right:40px;
+      max-width:540px;
+    }
+    .kicker{color:var(--muted);font-size:14px;margin-bottom:18px;font-weight:600}
+    .headline{
+      font-family:Montserrat, sans-serif;
+      font-weight:900;
+      font-size:clamp(64px, 9vw, 160px);
+      line-height:0.95;
+      letter-spacing:-2px;
+      margin:0;
+      color:rgba(255,255,255,0.96);
+      text-wrap:balance;
+    }
+    .subtext{color:var(--muted);margin-top:18px;font-size:15px;line-height:1.6}
+
+    /* Right column: hero image */
+    .hero-right{
+      position:relative;
+      z-index:15;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:60vh;
+      overflow:visible;
+    }
+    .hero-image{
+      width:110%;
+      max-width:1100px;
+      height:calc(60vh + 40px);
+      background-position:center;
+      background-size:cover;
+      border-radius:6px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7), inset 0 0 120px rgba(0,0,0,0.25);
+      transform:translateX(5%);
+    }
+
+    /* vertical number at right */
+    .index-num{
+      position:fixed;right:48px;top:50%;
+      transform:translateY(-50%) rotate(90deg);
+      color:rgba(255,255,255,0.06);
+      font-weight:900;font-size:120px;letter-spacing:12px;
+      z-index:12;
+      pointer-events:none;
+    }
+
+    /* small thumbnail overlay */
+    .thumb{
+      position:absolute;right:10%;bottom:6%;
+      width:120px;height:140px;border-radius:6px;overflow:hidden;
+      border:4px solid rgba(0,0,0,0.5);
+      box-shadow:0 20px 40px rgba(0,0,0,0.6);
+      z-index:30;
+      background:#111;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* circular nav arrows bottom-left */
+    .nav-arrows{position:fixed;left:36px;bottom:36px;display:flex;gap:12px;z-index:40}
+    .circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.03);cursor:pointer}
+    .circle.primary{background:var(--accent);color:#111;border:none}
+    .circle svg{width:18px;height:18px;display:block}
+
+    /* footer area small credit */
+    .credit{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);color:rgba(255,255,255,0.06);font-size:12px;z-index:5}
+
+    /* responsive adjustments */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr; padding-top:90px; padding-bottom:80px}
+      .hero-right{order:-1}
+      .index-num{display:none}
+      .thumb{right:6%}
+      header nav{padding:14px 18px}
+    }
+    @media (max-width:600px){
+      .kicker{font-size:13px}
+      .subtext{font-size:14px}
+      .thumb{width:88px;height:100px;bottom:8%}
+      .hero-left{padding-right:0}
+      .circle{width:48px;height:48px}
+      .circle.primary{width:48px;height:48px}
+      .headline{font-size:clamp(36px,14vw,68px)}
+    }
+
+  </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="index.html">Inicio</a>
-    <a href="biografía.html">Biografía</a>
-    <a href="carrera.html">Carrera</a>
-    <a href="discografía.html">Discografía</a>
-    <a href="galeria.html">Galería</a>
-    <a href="datos relevantes.html">Datos relevantes</a>
-    <a href="legado.html">Legado</a>
-  </nav>
-</header>
+  <!-- Header (user's requested content/structure) -->
+  <header>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="biografía.html">Biografía</a>
+      <a href="carrera.html">Carrera</a>
+      <a href="discografía.html">Discografía</a>
+      <a href="galeria.html">Galería</a>
+      <a href="datos relevantes.html">Datos relevantes</a>
+      <a href="legado.html">Legado</a>
+    </nav>
+  </header>
 
-<section class="section">
-  <h1>Biografía de Jero</h1>
-
-  <div class="columns">
-
-    <div class="column">
-      <p>
-        Jero (José Luis Segura Hernández) nació en Madrid en 1951. Desde muy joven mostró una sensibilidad
-        musical extraordinaria, influenciada por el flamenco callejero y la rumba urbana que dominaba
-        los barrios humildes de la época.
-      </p>
-
-      <p>
-        Su voz profunda, rasgada y llena de emoción lo convirtió rápidamente en un referente.  
-        Sus letras, siempre honestas y cargadas de realidad social, conectaron con miles de personas.
-      </p>
-
-      <p>
-        A principios de los años 70 entró a formar parte de Los Chichos como cantante principal, uniendo su
-        talento al de los hermanos González Gabarre y llevando al grupo a la cima del éxito.
-      </p>
+  <!-- Top-right small controls -->
+  <div class="top-controls" aria-hidden="true">
+    <div class="search" title="Buscar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="opacity:.7">Buscar...</span>
     </div>
-
-    <div class="column">
-      <img src="https://i.imgur.com/4PxYV7K.jpeg" alt="Jero joven">
-      <img src="https://i.imgur.com/7aUAAfh.jpeg" alt="Jero cantando">
-    </div>
-
+    <div class="hamburger" aria-label="menu"></div>
   </div>
 
-</section>
+  <!-- hero -->
+  <section class="hero" role="region" aria-label="Hero biográfico">
+    <div class="grid-overlay" aria-hidden="true"></div>
 
-<footer>
-  <p>© 2025 — Proyecto Jero</p>
-</footer>
+    <div class="hero-left" id="leftCol">
+      <div class="kicker">H-legends · Biografía</div>
+      <h1 class="headline" id="heroName">Robert De Niro</h1>
+
+      <p class="subtext" id="heroIntro">
+        Actor emblemático de Estados Unidos, ganador de múltiples premios y conocido por su intensidad interpretativa.
+        Su carrera, que abarca más de cinco décadas, ha marcado la historia del cine con papeles inolvidables.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <!-- Replace the URL below with your high-res portrait -->
+      <div class="hero-image" id="heroImage" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');"></div>
+
+      <!-- small thumbnail overlay — replace URL -->
+      <div class="thumb" id="thumb">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Mini retrato">
+      </div>
+    </div>
+
+  </section>
+
+  <!-- vertical big number -->
+  <div class="index-num" aria-hidden="true">003</div>
+
+  <!-- nav arrows -->
+  <div class="nav-arrows" aria-hidden="true">
+    <div class="circle" id="prevBtn" title="Anterior">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="circle primary" id="nextBtn" title="Siguiente">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="credit">H-legends · portfolio</div>
+
+  <script>
+    // Simple JS to change hero image / thumb when pressing arrows (demo)
+    (function(){
+      // Demo images array — replace with your own list
+      const images = [
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1600&auto=format&fit=crop'
+      ];
+      const names = ['Robert De Niro','Legend Name Two','Legend Name Three'];
+      const intros = [
+        'Actor emblemático de Estados Unidos, ganador de múltiples premios y conocido por su intensidad interpretativa.',
+        'Segunda biografía de ejemplo con descripción más breve pero igualmente potente.',
+        'Tercer ejemplo de ficha con estilo similar y narrativa compacta.'
+      ];
+
+      let idx = 0;
+      const heroImage = document.getElementById('heroImage');
+      const thumb = document.querySelector('.thumb img');
+      const heroName = document.getElementById('heroName');
+      const heroIntro = document.getElementById('heroIntro');
+
+      function update(i){
+        heroImage.style.backgroundImage = 'url('+images[i]+')';
+        thumb.src = images[i];
+        heroName.textContent = names[i];
+        heroIntro.textContent = intros[i];
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', function(){
+        idx = (idx + 1) % images.length;
+        update(idx);
+      });
+      document.getElementById('prevBtn').addEventListener('click', function(){
+        idx = (idx - 1 + images.length) % images.length;
+        update(idx);
+      });
+
+      // optional: click thumbnail to cycle
+      document.getElementById('thumb').addEventListener('click', function(){ idx=(idx+1)%images.length; update(idx) });
+
+      // initial
+      update(0);
+
+      // simple keyboard support
+      window.addEventListener('keydown', function(e){
+        if(e.key === 'ArrowRight') { idx = (idx+1) % images.length; update(idx) }
+        if(e.key === 'ArrowLeft') { idx = (idx-1+images.length) % images.length; update(idx) }
+      });
+    })();
+  </script>
 
 </body>
 </html>
+
